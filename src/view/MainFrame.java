@@ -11,6 +11,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,6 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+
+import controller.ExcelImporter;
+import model.Student;
 
 /**
  * 界面布局的类
@@ -127,6 +131,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		 */
 		else if (e.getSource().equals(btImport)) {
 			String filePath = tfFileSource.getText();
+			ExcelImporter excelImporter = new ExcelImporter();
+			ArrayList<Student> studentList =excelImporter.importExcel(filePath);
+			String i=studentList.get(1).getID();
+			System.out.println(i);
 
 		}
 		/*
