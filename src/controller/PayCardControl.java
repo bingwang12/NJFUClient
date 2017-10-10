@@ -18,9 +18,9 @@ import model.Record;
 public class PayCardControl {
 	/**
 	 * 
-	 * @param jtx文本框
-	 * @param jlab提示语文本
-	 * @param dbc数据库连接
+	 * @param jtx  文本框
+	 * @param jlab  提示语文本
+	 * @param dbc  数据库连接
 	 * 刷卡文本框的监听事件
 	 */
 	public static void conduct(JTextField jtx,JLabel jlab,DBController dbc) {

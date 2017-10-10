@@ -18,8 +18,8 @@ import model.StudentRecord;
 public class ImportControl {
 	/**
 	 * 
-	 * @param jtx文本框
-	 * @param dbc数据库连接
+	 * @param jtx 文本框
+	 * @param dbc 数据库连接
 	 * 导入按钮的监听事件
 	 */
 	public static void conduct(JTextField jtx,DBController dbc) {
