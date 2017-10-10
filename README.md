@@ -14,4 +14,5 @@ src/					代码
 		Record			记录
 		StudentRecord		总记录
 	view/				视图
+		MainFrame		主窗口
 ```
