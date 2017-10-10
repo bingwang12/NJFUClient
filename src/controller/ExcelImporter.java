@@ -6,12 +6,11 @@ package controller;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import model.Student;
 
@@ -45,9 +44,9 @@ public class ExcelImporter {
 		int i = 0;
 		try {
 			// 创建对Excel工作簿文件的引用
-			HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(filename));
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(filename));
 			// 创建对工作表的引用。在Excel文档中，第一张工作表的缺省索引是0
-			HSSFSheet sheet = workbook.getSheetAt(0);
+			XSSFSheet sheet = workbook.getSheetAt(0);
 			// 输出单元内容
 			for (Row row : sheet) {
 				for (Cell cell : row) {
