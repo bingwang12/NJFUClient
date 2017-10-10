@@ -19,32 +19,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+
 /**
  * 界面布局的类
  *
  */
 public class MainFrame extends JFrame implements ActionListener {
-/**
- * 
- * 宽高
- */
+
+	private static final long serialVersionUID = 721529053561467600L;
+	/**
+	 * 宽高
+	 */
 	public static int width = 500;
 	public static int height = 300;
 
 	JButton btSelectFile = new JButton("选择文件");
 	JButton btImport = new JButton("导入");
 	JTextField tfFileSource = new JTextField(10);
-	JFileChooser jfc = new JFileChooser();// 文件选择器  
-	JTextField payCard=new JTextField(10);
+	JFileChooser jfc = new JFileChooser();// 文件选择器
+	JTextField payCard = new JTextField(10);
 	JTextField StudentNumber = new JTextField(10);
 	JTextField CardNumber = new JTextField(10);
 	JButton update = new JButton("更新");
-	
-	
-/**
- * 初始化组件
- * 添加监听事件
- */
+
+	/**
+	 * 初始化组件 添加监听事件
+	 */
 	public void initComponents() {
 
 		JPanel panel = (JPanel) getContentPane();// 初始化内容界面，获得内容版面
@@ -62,16 +62,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		btSelectFile.addActionListener(this);
 		tfFileSource.addActionListener(this);
 		btImport.addActionListener(this);
-		
-		
-		
+
 		JPanel useCardPanel = new JPanel();// 初始化刷卡面板
 		useCardPanel.add(payCard);
 		jtp.add("刷卡", useCardPanel);// 在选项卡界面添加刷卡面板
 		payCard.addActionListener(this);
-		
-		
-		
+
 		JPanel changeCardPanel = new JPanel();// 初始化刷卡面板
 		changeCardPanel.add(new JLabel("学号："));
 		changeCardPanel.add(StudentNumber);
@@ -83,43 +79,40 @@ public class MainFrame extends JFrame implements ActionListener {
 		update.addActionListener(this);
 	}
 
-	
 	/**
-	 * 
 	 * 监听事件
-	 * 
 	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		/*
-		 * 选择文件的按钮监听事件
+		 * 选择文件的按钮
 		 * 
 		 */
-		if(e.getSource().equals(btSelectFile)) {
+		if (e.getSource().equals(btSelectFile)) {
 			jfc.setFileSelectionMode(0);
-			int state = jfc.showOpenDialog(null);// 此句是打开文件选择器界面的触发语句  
-            if (state == 1) {  
-                return;// 撤销则返回  
-            } else {  
-                File f = jfc.getSelectedFile();// f为选择到的文件  
-                tfFileSource.setText(f.getAbsolutePath());  
-            }  
+			int state = jfc.showOpenDialog(null);// 此句是打开文件选择器界面的触发语句
+			if (state == 1) {
+				return;// 撤销则返回
+			} else {
+				File f = jfc.getSelectedFile();// f为选择到的文件
+				tfFileSource.setText(f.getAbsolutePath());
+			}
 		}
 		/*
 		 * 
 		 * 导入按钮的监听事件
 		 * 
 		 */
-		else if(e.getSource().equals(btImport)) {
-			String filePath=tfFileSource.getText();
-			
+		else if (e.getSource().equals(btImport)) {
+			String filePath = tfFileSource.getText();
+
 		}
 		/*
 		 * 刷卡回车的监听事件
 		 * 
 		 */
-		else if(e.getSource().equals(payCard)) {
-			String cardNumber=payCard.getText();
+		else if (e.getSource().equals(payCard)) {
+			String cardNumber = payCard.getText();
 			payCard.setText("");
 			System.out.println(cardNumber);
 		}
@@ -127,19 +120,18 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 更新按钮的监听事件
 		 * 
 		 */
-		else if(e.getSource().equals(update)) {
-			String Studentnumber=StudentNumber.getText();
-			String Cardnumber=CardNumber.getText();
-			System.out.println("学号："+Studentnumber+"  卡号："+Cardnumber);
+		else if (e.getSource().equals(update)) {
+			String Studentnumber = StudentNumber.getText();
+			String Cardnumber = CardNumber.getText();
+			System.out.println("学号：" + Studentnumber + "  卡号：" + Cardnumber);
 		}
 	}
+
 	/**
 	 * 初始化界面的函数
-	 * 
-	 * 
 	 */
 	public MainFrame() {
-		
+
 		setTitle("刷卡系统");// 设软件标题
 		setSize(width, height);// 设软件宽和高
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// 设软件宽和高
