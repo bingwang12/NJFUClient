@@ -82,6 +82,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	JButton update = new JButton("更新");
 	/**
+	 * 更新提示语
+	 */
+	JLabel updateSuggession=new JLabel("");
+	/**
 	 * 连接或者打开d:\test.db文件
 	 */
 	DBController dbc = new DBController(new DBConnecter().getConnection("test"));
@@ -119,6 +123,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		changeCardPanel.add(new JLabel("卡号："));
 		changeCardPanel.add(CardNumber);
 		changeCardPanel.add(update);
+		changeCardPanel.add(updateSuggession);
 		jtp.add("换卡", changeCardPanel);// 在选项卡界面添加换卡面板
 		update.addActionListener(this);
 	}
@@ -155,7 +160,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 
 		 */
 		else if (e.getSource().equals(update)) {
-			new UpdateCardControl().conduct(StudentNumber, CardNumber, dbc);
+			new UpdateCardControl().conduct(StudentNumber, CardNumber, dbc,updateSuggession);
 		}
 	}
 
