@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 
 /**
  * 界面布局的类
- *
  */
 public class MainFrame extends JFrame implements ActionListener {
 
@@ -32,14 +31,37 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	public static int width = 500;
 	public static int height = 300;
-
+	/**
+	 * 选择文件按钮
+	 */
 	JButton btSelectFile = new JButton("选择文件");
+	/**
+	 * 导入按钮
+	 */
 	JButton btImport = new JButton("导入");
+	/**
+	 * 文件路径文本框
+	 */
 	JTextField tfFileSource = new JTextField(10);
-	JFileChooser jfc = new JFileChooser();// 文件选择器
+	/**
+	 * 文件选择器
+	 */
+	JFileChooser jfc = new JFileChooser();
+	/**
+	 * 刷卡用的文本框
+	 */
 	JTextField payCard = new JTextField(10);
+	/**
+	 * 学号文本框
+	 */
 	JTextField StudentNumber = new JTextField(10);
+	/**
+	 * 卡号文本框
+	 */
 	JTextField CardNumber = new JTextField(10);
+	/**
+	 * 卡号更新按钮
+	 */
 	JButton update = new JButton("更新");
 
 	/**
