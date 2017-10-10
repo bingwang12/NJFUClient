@@ -103,7 +103,9 @@ public class DBController {
 
 	/**
 	 * 添加学生
-	 * @param student 学生
+	 * 
+	 * @param student
+	 *            学生
 	 * @return 是否成功
 	 */
 	public int insertStudent(Student student) {
@@ -125,7 +127,9 @@ public class DBController {
 
 	/**
 	 * 插入记录
-	 * @param record 记录
+	 * 
+	 * @param record
+	 *            记录
 	 * @return 是否成功
 	 */
 	public int insertRecord(Record record) {
@@ -178,9 +182,35 @@ public class DBController {
 	 */
 	public int updateStudentRecord(String ID) {
 		try {
-			String sql = "UPDATE StudentRecord SET Score=Score+1 WHERE ID=?;";
+			String sql = "UPDATE StudentRecord SET Score=Score+1,LastRecord=? WHERE ID=?;";
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, ID);
+			stmt.setDate(1, new java.sql.Date(new java.util.Date().getTime()));
+			stmt.setString(2, ID);
+			int res = stmt.executeUpdate();
+			stmt.close();
+			return res;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return UPDATE_FAIL;
+	}
+
+	/**
+	 * 更换卡号
+	 * 
+	 * @param ID
+	 *            学号
+	 * @param newCardID
+	 *            新卡号
+	 * @return 是否成功
+	 */
+	public int updateCardID(String ID, String newCardID) {
+		try {
+			String sql = "UPDATE Student SET CardID=? WHERE ID=?;";
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, newCardID);
+			stmt.setString(2, ID);
 			int res = stmt.executeUpdate();
 			stmt.close();
 			return res;
