@@ -40,7 +40,7 @@ public class DBConnecter {
 	 */
 	public Connection getConnection(String dbname) {
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:" + dbname + ".db");
+			connection = DriverManager.getConnection("jdbc:sqlite://d:/" + dbname + ".db");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

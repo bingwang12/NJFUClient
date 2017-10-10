@@ -11,7 +11,9 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,8 +23,16 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import controller.DBConnecter;
+import controller.DBController;
 import controller.ExcelImporter;
+import controller.FileSelectControl;
+import controller.ImportControl;
+import controller.PayCardControl;
+import controller.UpdateCardControl;
+import model.Record;
 import model.Student;
+import model.StudentRecord;
 
 /**
  * 界面布局的类
@@ -56,6 +66,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	JTextField payCard = new JTextField(10);
 	/**
+	 * 页面提示文本
+	 */
+	JLabel suggession=new JLabel("欢迎使用");
+	/**
 	 * 学号文本框
 	 */
 	JTextField StudentNumber = new JTextField(10);
@@ -67,7 +81,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	 * 卡号更新按钮
 	 */
 	JButton update = new JButton("更新");
-
+	/**
+	 * 连接或者打开d:\test.db文件
+	 */
+	DBController dbc = new DBController(new DBConnecter().getConnection("test"));
 	/**
 	 * 初始化组件 添加监听事件
 	 */
@@ -91,6 +108,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		JPanel useCardPanel = new JPanel();// 初始化刷卡面板
 		useCardPanel.add(payCard);
+		useCardPanel.add(suggession);
 		jtp.add("刷卡", useCardPanel);// 在选项卡界面添加刷卡面板
 		payCard.addActionListener(this);
 
@@ -115,14 +133,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 
 		 */
 		if (e.getSource().equals(btSelectFile)) {
-			jfc.setFileSelectionMode(0);
-			int state = jfc.showOpenDialog(null);// 此句是打开文件选择器界面的触发语句
-			if (state == 1) {
-				return;// 撤销则返回
-			} else {
-				File f = jfc.getSelectedFile();// f为选择到的文件
-				tfFileSource.setText(f.getAbsolutePath());
-			}
+			new FileSelectControl().conduct(jfc, tfFileSource);
 		}
 		/*
 		 * 
@@ -130,30 +141,21 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 
 		 */
 		else if (e.getSource().equals(btImport)) {
-			String filePath = tfFileSource.getText();
-			ExcelImporter excelImporter = new ExcelImporter();
-			ArrayList<Student> studentList =excelImporter.importExcel(filePath);
-			String i=studentList.get(1).getID();
-			System.out.println(i);
-
+			new ImportControl().conduct(tfFileSource, dbc);
 		}
 		/*
 		 * 刷卡回车的监听事件
 		 * 
 		 */
 		else if (e.getSource().equals(payCard)) {
-			String cardNumber = payCard.getText();
-			payCard.setText("");
-			System.out.println(cardNumber);
+			new PayCardControl().conduct(payCard,suggession,dbc);
 		}
 		/*
 		 * 更新按钮的监听事件
 		 * 
 		 */
 		else if (e.getSource().equals(update)) {
-			String Studentnumber = StudentNumber.getText();
-			String Cardnumber = CardNumber.getText();
-			System.out.println("学号：" + Studentnumber + "  卡号：" + Cardnumber);
+			new UpdateCardControl().conduct(StudentNumber, CardNumber, dbc);
 		}
 	}
 
@@ -161,7 +163,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	 * 初始化界面的函数
 	 */
 	public MainFrame() {
-
 		setTitle("刷卡系统");// 设软件标题
 		setSize(width, height);// 设软件宽和高
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// 设软件宽和高
