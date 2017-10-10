@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import model.Student;
+import view.MainFrame;
 
 /**
  * 表格读取器
@@ -78,5 +79,8 @@ public class ExcelImporter {
 		}
 		return studentList;
 	}
-
+	public static void main(String[] args) {
+		ExcelImporter view1=new ExcelImporter();
+		view1.importExcel("d:\\aaa.xlsx");
+	}
 }
