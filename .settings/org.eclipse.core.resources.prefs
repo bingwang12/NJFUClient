@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/controller/package-info.java=UTF-8
 encoding//src/main/package-info.java=UTF-8
 encoding//src/model/Record.java=UTF-8
@@ -6,3 +7,7 @@ encoding//src/model/Student.java=UTF-8
 encoding//src/model/StudentRecord.java=UTF-8
 encoding//src/model/package-info.java=UTF-8
 encoding/<project>=UTF-8
+=======
+encoding//src/main/Main.java=UTF-8
+encoding//src/view/view.java=UTF-8
+>>>>>>> parent of 3cb9b96... 基本监听写好了
