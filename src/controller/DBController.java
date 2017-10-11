@@ -253,15 +253,15 @@ public class DBController {
 	/**
 	 * 是否有记录
 	 * 
-	 * @param ID
-	 *            学号
+	 * @param CardID
+	 *            卡号
 	 * @return 是否有记录
 	 */
-	public boolean hasRecord(String ID) {
+	public boolean hasRecord(String CardID) {
 		try {
-			String sql = "SELECT * FROM StudentRecord WHERE ID=?;";
+			String sql = "SELECT * FROM Student WHERE CardID=?;";
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, ID);
+			stmt.setString(1, CardID);
 			ResultSet res = stmt.executeQuery();
 			int count = 0;
 			while (res.next()) {
