@@ -23,7 +23,7 @@ import view.MainFrame;
 public class Main {
 
 	/**
-	 * @param args  主函数的参数
+	 * @param args
 	 */
 	public static void main(String[] args) {
 

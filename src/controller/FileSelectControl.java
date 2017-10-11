@@ -15,8 +15,8 @@ import javax.swing.JTextField;
 public class FileSelectControl {
 	/**
 	 * 
-	 * @param jfc 文件选择器
-	 * @param jtf 文本框
+	 * @param jfc文件选择器
+	 * @param jtf文本框
 	 * 
 	 * 文件选择按钮的监听事件
 	 */
