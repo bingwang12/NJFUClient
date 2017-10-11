@@ -68,7 +68,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	/**
 	 * 页面提示文本
 	 */
-	JLabel suggession=new JLabel("欢迎使用");
+	JLabel suggession = new JLabel("欢迎使用");
 	/**
 	 * 学号文本框
 	 */
@@ -85,6 +85,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	 * 连接或者打开d:\test.db文件
 	 */
 	DBController dbc = new DBController(new DBConnecter().getConnection("test"));
+
 	/**
 	 * 初始化组件 添加监听事件
 	 */
@@ -148,7 +149,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 
 		 */
 		else if (e.getSource().equals(payCard)) {
-			new PayCardControl().conduct(payCard,suggession,dbc);
+			new PayCardControl().conduct(payCard, suggession, dbc);
 		}
 		/*
 		 * 更新按钮的监听事件

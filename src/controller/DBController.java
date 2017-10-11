@@ -103,7 +103,9 @@ public class DBController {
 
 	/**
 	 * 添加学生
-	 * @param student 学生
+	 * 
+	 * @param student
+	 *            学生
 	 * @return 是否成功
 	 */
 	public int insertStudent(Student student) {
@@ -125,7 +127,9 @@ public class DBController {
 
 	/**
 	 * 插入记录
-	 * @param record 记录
+	 * 
+	 * @param record
+	 *            记录
 	 * @return 是否成功
 	 */
 	public int insertRecord(Record record) {
@@ -191,6 +195,7 @@ public class DBController {
 		}
 		return UPDATE_FAIL;
 	}
+
 	/**
 	 * 更换卡号
 	 * 
@@ -215,6 +220,7 @@ public class DBController {
 		}
 		return UPDATE_FAIL;
 	}
+
 	/**
 	 * 根据卡号查询学号
 	 * 
