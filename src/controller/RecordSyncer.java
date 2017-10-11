@@ -5,12 +5,14 @@ package controller;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
@@ -37,7 +39,10 @@ public class RecordSyncer {
 	private String path;
 
 	/**
-	 * 
+	 * 构造函数
+	 * @param _dbc 数据库控制器
+	 * @param _host 服务器地址
+	 * @param _path 路径
 	 */
 	public RecordSyncer(DBController _dbc, String _host, String _path) {
 		setDbc(_dbc);
@@ -50,8 +55,17 @@ public class RecordSyncer {
 	 * @param record 要同步的记录
 	 */
 	public void Sync(Record record) {
-		/*try {
+		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
+			URI targetURI = new URIBuilder()
+			        .setScheme("http")
+			        .setHost(getHost())
+			        .setPath(getPath())
+			        .setParameter("q", "httpclient")
+			        .setParameter("btnG", "Google Search")
+			        .setParameter("aq", "f")
+			        .setParameter("oq", "")
+			        .build();
 			HttpPost httppost = new HttpPost(targetURI);
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
@@ -61,7 +75,10 @@ public class RecordSyncer {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
