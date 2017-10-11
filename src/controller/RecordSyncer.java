@@ -10,11 +10,11 @@ import java.net.URISyntaxException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import model.Record;
 
@@ -40,9 +40,13 @@ public class RecordSyncer {
 
 	/**
 	 * 构造函数
-	 * @param _dbc 数据库控制器
-	 * @param _host 服务器地址
-	 * @param _path 路径
+	 * 
+	 * @param _dbc
+	 *            数据库控制器
+	 * @param _host
+	 *            服务器地址
+	 * @param _path
+	 *            路径
 	 */
 	public RecordSyncer(DBController _dbc, String _host, String _path) {
 		setDbc(_dbc);
@@ -50,25 +54,27 @@ public class RecordSyncer {
 		setPath(_path);
 	}
 
+	public void SyncAll() {
+
+	}
+
 	/**
 	 * 同步记录
-	 * @param record 要同步的记录
+	 * 
+	 * @param record
+	 *            要同步的记录
 	 */
 	public void Sync(Record record) {
 		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
-			URI targetURI = new URIBuilder()
-			        .setScheme("http")
-			        .setHost(getHost())
-			        .setPath(getPath())
-			        .setParameter("q", "httpclient")
-			        .setParameter("btnG", "Google Search")
-			        .setParameter("aq", "f")
-			        .setParameter("oq", "")
-			        .build();
+			URI targetURI = new URIBuilder().setScheme("http").setHost(getHost()).setPath(getPath())
+					.setParameter("ID", record.getID())
+					.setParameter("Time", ((Long) (record.getTime().getTime())).toString()).setParameter("aq", "f")
+					.build();
 			HttpPost httppost = new HttpPost(targetURI);
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
+			System.out.println(EntityUtils.toString(entity)); // test
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -11,10 +11,6 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -25,14 +21,10 @@ import javax.swing.JTextField;
 
 import controller.DBConnecter;
 import controller.DBController;
-import controller.ExcelImporter;
 import controller.FileSelectControl;
 import controller.ImportControl;
 import controller.PayCardControl;
 import controller.UpdateCardControl;
-import model.Record;
-import model.Student;
-import model.StudentRecord;
 
 /**
  * 界面布局的类
@@ -134,7 +126,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 
 		 */
 		if (e.getSource().equals(btSelectFile)) {
-			new FileSelectControl().conduct(jfc, tfFileSource);
+			new FileSelectControl();
+			FileSelectControl.conduct(jfc, tfFileSource);
 		}
 		/*
 		 * 
@@ -142,21 +135,24 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 
 		 */
 		else if (e.getSource().equals(btImport)) {
-			new ImportControl().conduct(tfFileSource, dbc);
+			new ImportControl();
+			ImportControl.conduct(tfFileSource, dbc);
 		}
 		/*
 		 * 刷卡回车的监听事件
 		 * 
 		 */
 		else if (e.getSource().equals(payCard)) {
-			new PayCardControl().conduct(payCard, suggession, dbc);
+			new PayCardControl();
+			PayCardControl.conduct(payCard, suggession, dbc);
 		}
 		/*
 		 * 更新按钮的监听事件
 		 * 
 		 */
 		else if (e.getSource().equals(update)) {
-			new UpdateCardControl().conduct(StudentNumber, CardNumber, dbc);
+			new UpdateCardControl();
+			UpdateCardControl.conduct(StudentNumber, CardNumber, dbc);
 		}
 	}
 
