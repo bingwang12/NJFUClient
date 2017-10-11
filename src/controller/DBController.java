@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.Record;
 import model.Student;
@@ -274,6 +276,29 @@ public class DBController {
 	}
 
 	/**
+	 * 获取所有未同步记录
+	 * 
+	 * @return 未同步记录的HashMap,RecordID是key
+	 */
+	public HashMap<Integer, Record> getAllUnsyncedRecords() {
+		try {
+			HashMap<Integer, Record> map = new HashMap<Integer, Record>();
+			String sql = "SELECT ID, Time FROM Record WHERE Synced=0;";
+			Statement stmt = connection.createStatement();
+			ResultSet res = stmt.executeQuery(sql);
+			while (res.next()) {
+				map.put(Integer.parseInt(res.getString("Record_ID")),
+						new Record(res.getString("ID"), res.getDate("Time"), res.getBoolean("Synced")));
+			}
+			return map;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
 	 * @return the connection
 	 */
 	public Connection getConnection() {
@@ -287,5 +312,4 @@ public class DBController {
 	public void setConnection(Connection connection) {
 		this.connection = connection;
 	}
-
 }
