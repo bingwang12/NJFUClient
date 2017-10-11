@@ -1,6 +1,3 @@
-/**
- * 
- */
 package controller;
 
 import java.sql.Timestamp;
@@ -10,19 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import model.Record;
-/**
- * 刷卡控制器
- * @author WangBing
- *
- */
+
 public class PayCardControl {
-	/**
-	 * 
-	 * @param jtx文本框
-	 * @param jlab提示语文本
-	 * @param dbc数据库连接
-	 * 刷卡文本框的监听事件
-	 */
 	public static void conduct(JTextField jtx,JLabel jlab,DBController dbc) {
 		Date date = new Date();//获取当前时间数据
 		Timestamp timestamp = new Timestamp(date.getTime()); //将date转换成datetime
