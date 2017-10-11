@@ -6,6 +6,7 @@ package controller;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,6 +26,10 @@ import model.Record;
  *
  */
 public class RecordSyncer {
+	/**
+	 * 同步失败
+	 */
+	static final String FAIL_TO_SYNC = "FAIL TO SYNC";
 	/**
 	 * 数据库控制器
 	 */
@@ -55,7 +60,14 @@ public class RecordSyncer {
 	}
 
 	public void SyncAll() {
-
+		HashMap<Integer, Record> map = dbc.getAllUnsyncedRecords();
+		for (Integer key : map.keySet()) {
+			if (!Sync(map.get(key)).equals(FAIL_TO_SYNC)) {
+				dbc.updateRecord(key);
+			} else {
+				// TODO
+			}
+		}
 	}
 
 	/**
@@ -64,7 +76,7 @@ public class RecordSyncer {
 	 * @param record
 	 *            要同步的记录
 	 */
-	public void Sync(Record record) {
+	public String Sync(Record record) {
 		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			URI targetURI = new URIBuilder().setScheme("http").setHost(getHost()).setPath(getPath())
@@ -74,7 +86,7 @@ public class RecordSyncer {
 			HttpPost httppost = new HttpPost(targetURI);
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
-			System.out.println(EntityUtils.toString(entity)); // test
+			return EntityUtils.toString(entity); // test
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,6 +97,7 @@ public class RecordSyncer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return FAIL_TO_SYNC;
 
 	}
 

@@ -298,6 +298,28 @@ public class DBController {
 	}
 
 	/**
+	 * 标记已同步的记录
+	 * 
+	 * @param Record_ID
+	 *            记录编号
+	 * @return 是否成功
+	 */
+	public int updateRecord(int Record_ID) {
+		try {
+			String sql = "UPDATE Record SET Synced=1 WHERE Record_ID=？;";
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, Record_ID);
+			int res = stmt.executeUpdate();
+			stmt.close();
+			return res;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return UPDATE_FAIL;
+	}
+
+	/**
 	 * @return the connection
 	 */
 	public Connection getConnection() {
