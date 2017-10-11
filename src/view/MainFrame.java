@@ -1,11 +1,7 @@
 /**
  * 
  */
-/**
- * 主窗口
- * @author WangBing
- *
- */
+
 package view;
 
 import java.awt.event.ActionEvent;
@@ -27,7 +23,9 @@ import controller.PayCardControl;
 import controller.UpdateCardControl;
 
 /**
- * 界面布局的类
+ * 主窗口
+ * @author WangBing
+ *
  */
 public class MainFrame extends JFrame implements ActionListener {
 
