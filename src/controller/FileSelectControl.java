@@ -11,6 +11,7 @@ import java.io.File;
  */
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
+
 /**
  * 文件选择控制器
  * 
@@ -19,11 +20,13 @@ import javax.swing.JTextField;
  */
 public class FileSelectControl {
 	/**
+	 * 文件选择按钮的监听事件
 	 * 
-	 * @param jfc文件选择器
-	 * @param jtf文本框
+	 * @param jfc
+	 *            文件选择器
+	 * @param jtf
+	 *            文本框
 	 * 
-	 *            文件选择按钮的监听事件
 	 */
 	public static void conduct(JFileChooser jfc, JTextField jtf) {
 		jfc.setFileSelectionMode(0);

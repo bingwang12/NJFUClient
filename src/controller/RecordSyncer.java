@@ -75,6 +75,7 @@ public class RecordSyncer {
 	 * 
 	 * @param record
 	 *            要同步的记录
+	 * @return 服务器回执
 	 */
 	public String Sync(Record record) {
 		try {
