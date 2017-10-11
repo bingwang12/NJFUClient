@@ -26,9 +26,15 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		DBController dbc = new DBController(new DBConnecter().getConnection("test"));
-		System.out.println(dbc.insertStudentRecord(new StudentRecord("aaappp",20,new Date())));
-		System.out.println(dbc.hasRecord("aaappp"));
+
+		MainFrame newMainframe = new MainFrame();
+		newMainframe.setVisible(true);
+
+		// DBController dbc = new DBController(new DBConnecter().getConnection("test"));
+		// System.out.println(dbc.insertStudentRecord(new StudentRecord("aaappp",20,new
+		// Date())));
+		// System.out.println(dbc.hasRecord("aaappp"));
+
 	}
 
 }
