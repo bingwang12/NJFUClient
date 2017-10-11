@@ -12,12 +12,16 @@ import model.Student;
 import model.StudentRecord;
 
 /**
- * 
+ * 文件导入控制器
  * @author WangBing
  *
  */
 public class ImportControl {
-
+	/**
+	 * 导入按钮的监听事件
+	 * @param jtx 文件路径文本框
+	 * @param dbc 数据库连接
+	 */
 	public static void conduct(JTextField jtx, DBController dbc) {
 		String filePath = jtx.getText();// 拿到文件路径
 		ExcelImporter excelImporter = new ExcelImporter();// 初始化Excel文件读取
