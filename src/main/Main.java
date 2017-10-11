@@ -3,15 +3,6 @@
  */
 package main;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import controller.DBConnecter;
-import controller.DBController;
-import controller.ExcelImporter;
-import model.Record;
-import model.Student;
-import model.StudentRecord;
 import view.MainFrame;
 
 /**
