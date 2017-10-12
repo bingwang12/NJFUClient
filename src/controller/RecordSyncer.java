@@ -11,6 +11,7 @@ import java.util.HashMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -80,21 +81,22 @@ public class RecordSyncer {
 	public String Sync(Record record) {
 		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
-			URI targetURI = new URIBuilder().setScheme("http").setHost(getHost()).setPath(getPath())
-					.setParameter("ID", record.getID())
-					.setParameter("Time", ((Long) (record.getTime().getTime())).toString()).setParameter("aq", "f")
-					.build();
-			HttpPost httppost = new HttpPost(targetURI);
-			HttpResponse response = httpclient.execute(httppost);
+			/*
+			 * URI targetURI = new
+			 * URIBuilder().setScheme("http").setHost(getHost()).setPath(getPath())
+			 * .setParameter("r", "record/record").setParameter("id", record.getID())
+			 * .setParameter("time", ((Long)
+			 * (record.getTime().getTime())).toString()).build();
+			 */
+			HttpGet httpget = new HttpGet("http://" + host + path + "?r=record/record" + "&id=" + record.getID()
+					+ "&time=" + ((Long) (record.getTime().getTime())).toString());
+			HttpResponse response = httpclient.execute(httpget);
 			HttpEntity entity = response.getEntity();
 			return EntityUtils.toString(entity); // test
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
