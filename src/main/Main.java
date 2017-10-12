@@ -3,6 +3,12 @@
  */
 package main;
 
+import java.util.Date;
+
+import controller.DBConnecter;
+import controller.DBController;
+import controller.RecordSyncer;
+import model.Record;
 import view.MainFrame;
 
 /**
@@ -17,14 +23,12 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		MainFrame newMainframe = new MainFrame();
-		newMainframe.setVisible(true);
-
-		// DBController dbc = new DBController(new DBConnecter().getConnection("test"));
-		// System.out.println(dbc.insertStudentRecord(new StudentRecord("aaappp",20,new
-		// Date())));
-		// System.out.println(dbc.hasRecord("aaappp"));
+		DBController dbct = new DBController((new DBConnecter()).getConnection("test"));
+		RecordSyncer rs = new RecordSyncer(dbct, "120.27.122.238", "/NJFUTest/basic/web/index.php");
+		String response = rs.Sync(new Record("123", new Date(), false));
+		System.out.println(response);
+		// MainFrame newMainframe = new MainFrame();
+		// newMainframe.setVisible(true);
 
 	}
 
