@@ -282,11 +282,11 @@ public class DBController {
 	public HashMap<Integer, Record> getAllUnsyncedRecords() {
 		try {
 			HashMap<Integer, Record> map = new HashMap<Integer, Record>();
-			String sql = "SELECT ID, Time FROM Record WHERE Synced=0;";
+			String sql = "SELECT * FROM Record WHERE Synced=0;";
 			Statement stmt = connection.createStatement();
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
-				map.put(Integer.parseInt(res.getString("Record_ID")),
+				map.put(res.getInt("Record_ID"),
 						new Record(res.getString("ID"), res.getDate("Time"), res.getBoolean("Synced")));
 			}
 			return map;
@@ -306,7 +306,7 @@ public class DBController {
 	 */
 	public int updateRecord(int Record_ID) {
 		try {
-			String sql = "UPDATE Record SET Synced=1 WHERE Record_ID=？;";
+			String sql = "UPDATE Record SET Synced=1 WHERE Record_ID=?;";
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, Record_ID);
 			int res = stmt.executeUpdate();
