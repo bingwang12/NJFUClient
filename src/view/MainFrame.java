@@ -1,11 +1,7 @@
 /**
  * 
  */
-/**
- * 主窗口
- * @author WangBing
- *
- */
+
 package view;
 
 import java.awt.event.ActionEvent;
@@ -24,10 +20,14 @@ import controller.DBController;
 import controller.FileSelectControl;
 import controller.ImportControl;
 import controller.PayCardControl;
+import controller.RecordSyncer;
 import controller.UpdateCardControl;
 
 /**
- * 界面布局的类
+ * 主窗口
+ * 
+ * @author WangBing
+ *
  */
 public class MainFrame extends JFrame implements ActionListener {
 
@@ -74,6 +74,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	JButton update = new JButton("更新");
 	/**
+	 * 卡号更新按钮
+	 */
+	JButton Syner = new JButton("上传数据");
+	/**
 	 * 连接或者打开d:\test.db文件
 	 */
 	DBController dbc = new DBController(new DBConnecter().getConnection("test"));
@@ -114,6 +118,11 @@ public class MainFrame extends JFrame implements ActionListener {
 		changeCardPanel.add(update);
 		jtp.add("换卡", changeCardPanel);// 在选项卡界面添加换卡面板
 		update.addActionListener(this);
+
+		JPanel SynerPanel = new JPanel();// 初始化刷卡面板
+		SynerPanel.add(Syner);
+		jtp.add("上传数据", SynerPanel);// 在选项卡界面添加刷卡面板
+		Syner.addActionListener(this);
 	}
 
 	/**
@@ -153,6 +162,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		else if (e.getSource().equals(update)) {
 			new UpdateCardControl();
 			UpdateCardControl.conduct(StudentNumber, CardNumber, dbc);
+		}
+		/*
+		 * 上传按钮
+		 * 
+		 */
+		else if (e.getSource().equals(Syner)) {
+			RecordSyncer resy = new RecordSyncer(dbc, "120.27.122.238", "/NJFUTest/basic/web/index.php");
+			resy.SyncAll();
 		}
 	}
 

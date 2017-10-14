@@ -4,10 +4,12 @@
 package controller;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.HashMap;
 
 import model.Record;
@@ -181,11 +183,11 @@ public class DBController {
 	 *            学号
 	 * @return 是否成功
 	 */
-	public int updateStudentRecord(String ID) {
+	public int updateStudentRecord(String ID, Date date) {
 		try {
 			String sql = "UPDATE StudentRecord SET Score=Score+1,LastRecord=? WHERE ID=?;";
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setDate(1, new java.sql.Date(new java.util.Date().getTime()));
+			stmt.setDate(1, date);
 			stmt.setString(2, ID);
 			int res = stmt.executeUpdate();
 			stmt.close();
@@ -282,14 +284,37 @@ public class DBController {
 	public HashMap<Integer, Record> getAllUnsyncedRecords() {
 		try {
 			HashMap<Integer, Record> map = new HashMap<Integer, Record>();
-			String sql = "SELECT ID, Time FROM Record WHERE Synced=0;";
+			String sql = "SELECT * FROM Record WHERE Synced=0;";
 			Statement stmt = connection.createStatement();
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
-				map.put(Integer.parseInt(res.getString("Record_ID")),
+				map.put(res.getInt("Record_ID"),
 						new Record(res.getString("ID"), res.getDate("Time"), res.getBoolean("Synced")));
 			}
 			return map;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 根据学号拿最后更新的时间
+	 * 
+	 */
+	public String getTimeFromStudentRecord(String id) {
+		try {
+			String sql = "SELECT * FROM StudentRecord WHERE ID=?;";
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, id);
+			ResultSet res = stmt.executeQuery();
+			int count = 0;
+			while (res.next()) {
+				String result = res.getString("LastRecord");
+				return result;
+			}
+			return null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -306,7 +331,7 @@ public class DBController {
 	 */
 	public int updateRecord(int Record_ID) {
 		try {
-			String sql = "UPDATE Record SET Synced=1 WHERE Record_ID=？;";
+			String sql = "UPDATE Record SET Synced=1 WHERE Record_ID=?;";
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, Record_ID);
 			int res = stmt.executeUpdate();

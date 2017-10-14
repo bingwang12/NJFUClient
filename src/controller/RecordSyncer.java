@@ -62,14 +62,19 @@ public class RecordSyncer {
 
 	public void SyncAll() {
 		HashMap<Integer, Record> map = dbc.getAllUnsyncedRecords();
+
+		// if (map.keySet() != null || !map.keySet().isEmpty()) {
 		for (Integer key : map.keySet()) {
-			if (!Sync(map.get(key)).equals(FAIL_TO_SYNC)) {
+			String response = Sync(map.get(key));
+			if (!response.equals(FAIL_TO_SYNC)) {
 				dbc.updateRecord(key);
+				System.out.println(response);
 			} else {
 				// TODO
 			}
 		}
 	}
+	// }
 
 	/**
 	 * 同步记录
@@ -88,10 +93,15 @@ public class RecordSyncer {
 			 * .setParameter("time", ((Long)
 			 * (record.getTime().getTime())).toString()).build();
 			 */
-			HttpGet httpget = new HttpGet("http://" + host + path + "?r=record/record" + "&id=" + record.getID()
-					+ "&time=" + ((Long) (record.getTime().getTime())).toString());
+			String id = record.getID();
+			String time = ((Long) (record.getTime().getTime())).toString();
+			String scret = new EncoderByBASE64Encoder().Ender(id + time);// 加密的
+			System.out.println(scret);
+			HttpGet httpget = new HttpGet(
+					"http://" + host + path + "?r=record/record" + "&id=" + id + "&time=" + time + "&scret=" + scret);
 			HttpResponse response = httpclient.execute(httpget);
 			HttpEntity entity = response.getEntity();
+			// System.out.println(EntityUtils.toString(entity));
 			return EntityUtils.toString(entity); // test
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

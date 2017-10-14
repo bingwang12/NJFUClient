@@ -1,6 +1,7 @@
 package controller;
 
 import javax.swing.JTextField;
+
 /**
  * 更新卡号控制器
  * 
@@ -10,9 +11,12 @@ import javax.swing.JTextField;
 public class UpdateCardControl {
 	/**
 	 * 
-	 * @param jtx_Student 学号文本框
-	 * @param jtx_Card 卡号文本框
-	 * @param dbc 数据库连接
+	 * @param jtx_Student
+	 *            学号文本框
+	 * @param jtx_Card
+	 *            卡号文本框
+	 * @param dbc
+	 *            数据库连接
 	 */
 	public static void conduct(JTextField jtx_Student, JTextField jtx_Card, DBController dbc) {
 		String Studentnumber = jtx_Student.getText();// 获取学生的学号
