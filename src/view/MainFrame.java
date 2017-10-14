@@ -25,6 +25,7 @@ import controller.UpdateCardControl;
 
 /**
  * 主窗口
+ * 
  * @author WangBing
  *
  */
@@ -117,7 +118,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		changeCardPanel.add(update);
 		jtp.add("换卡", changeCardPanel);// 在选项卡界面添加换卡面板
 		update.addActionListener(this);
-		
+
 		JPanel SynerPanel = new JPanel();// 初始化刷卡面板
 		SynerPanel.add(Syner);
 		jtp.add("上传数据", SynerPanel);// 在选项卡界面添加刷卡面板
@@ -166,8 +167,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 上传按钮
 		 * 
 		 */
-		else if(e.getSource().equals(Syner)) {
-			RecordSyncer resy=new RecordSyncer(dbc, "120.27.122.238", "/NJFUTest/basic/web/index.php");
+		else if (e.getSource().equals(Syner)) {
+			RecordSyncer resy = new RecordSyncer(dbc, "120.27.122.238", "/NJFUTest/basic/web/index.php");
 			resy.SyncAll();
 		}
 	}

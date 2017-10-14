@@ -65,12 +65,12 @@ public class RecordSyncer {
 
 		// if (map.keySet() != null || !map.keySet().isEmpty()) {
 		for (Integer key : map.keySet()) {
-			if (!Sync(map.get(key)).equals(FAIL_TO_SYNC)) {
+			String response = Sync(map.get(key));
+			if (!response.equals(FAIL_TO_SYNC)) {
 				dbc.updateRecord(key);
-				// System.out.println("不为空");
+				System.out.println(response);
 			} else {
-				// System.out.println("为空");
-				// System.out.println("Key: "+key+" Value: "+map.get(key)); // TODO
+				// TODO
 			}
 		}
 	}
@@ -95,7 +95,7 @@ public class RecordSyncer {
 			 */
 			String id = record.getID();
 			String time = ((Long) (record.getTime().getTime())).toString();
-			long scret = (((Long) (record.getTime().getTime()) + Integer.parseInt(id)) / 333);// 加密的
+			String scret = new EncoderByBASE64Encoder().Ender(id + time);// 加密的
 			System.out.println(scret);
 			HttpGet httpget = new HttpGet(
 					"http://" + host + path + "?r=record/record" + "&id=" + id + "&time=" + time + "&scret=" + scret);
