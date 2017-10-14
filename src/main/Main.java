@@ -3,7 +3,6 @@
  */
 package main;
 
-
 import java.math.BigInteger;
 import java.sql.Blob;
 import java.util.Date;
@@ -26,18 +25,19 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-	         
-		//Date dt=new Date();
-		//DBController dbct = new DBController((new DBConnecter()).getConnection("test"));
-		//RecordSyncer rs = new RecordSyncer(dbct, "120.27.122.238", "/NJFUTest/basic/web/index.php");
+
+		// Date dt=new Date();
+		// DBController dbct = new DBController((new
+		// DBConnecter()).getConnection("test"));
+		// RecordSyncer rs = new RecordSyncer(dbct, "120.27.122.238",
+		// "/NJFUTest/basic/web/index.php");
 		// String response = rs.Sync(new Record("2", dt, false));
-		//long Scret=Integer.parseInt("2")+dt.getTime();
-		//long Scret1=Scret/333;
-		//System.out.println(response);
-		//System.out.println(Scret1);
-		 MainFrame newMainframe = new MainFrame();
-		 newMainframe.setVisible(true);
+		// long Scret=Integer.parseInt("2")+dt.getTime();
+		// long Scret1=Scret/333;
+		// System.out.println(response);
+		// System.out.println(Scret1);
+		MainFrame newMainframe = new MainFrame();
+		newMainframe.setVisible(true);
 
 	}
 

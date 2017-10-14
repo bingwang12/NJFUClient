@@ -62,19 +62,19 @@ public class RecordSyncer {
 
 	public void SyncAll() {
 		HashMap<Integer, Record> map = dbc.getAllUnsyncedRecords();
-		
-		//if (map.keySet() != null || !map.keySet().isEmpty()) {
-			for (Integer key : map.keySet()) {
-				if (!Sync(map.get(key)).equals(FAIL_TO_SYNC)) {
-					dbc.updateRecord(key);
-		//	System.out.println("不为空");
+
+		// if (map.keySet() != null || !map.keySet().isEmpty()) {
+		for (Integer key : map.keySet()) {
+			if (!Sync(map.get(key)).equals(FAIL_TO_SYNC)) {
+				dbc.updateRecord(key);
+				// System.out.println("不为空");
 			} else {
-		//			System.out.println("为空");
-		//		System.out.println("Key: "+key+" Value: "+map.get(key));		// TODO
-				}
+				// System.out.println("为空");
+				// System.out.println("Key: "+key+" Value: "+map.get(key)); // TODO
 			}
 		}
-	//}
+	}
+	// }
 
 	/**
 	 * 同步记录
@@ -101,7 +101,7 @@ public class RecordSyncer {
 					"http://" + host + path + "?r=record/record" + "&id=" + id + "&time=" + time + "&scret=" + scret);
 			HttpResponse response = httpclient.execute(httpget);
 			HttpEntity entity = response.getEntity();
-			//System.out.println(EntityUtils.toString(entity));
+			// System.out.println(EntityUtils.toString(entity));
 			return EntityUtils.toString(entity); // test
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
