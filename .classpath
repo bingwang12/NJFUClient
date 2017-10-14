@@ -24,6 +24,6 @@
 	<classpathentry kind="lib" path="lib/poi-scratchpad-3.17.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.20.0.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar"/>
+	<classpathentry kind="lib" path="lib/rt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
