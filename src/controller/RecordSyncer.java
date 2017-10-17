@@ -59,19 +59,29 @@ public class RecordSyncer {
 		setHost(_host);
 		setPath(_path);
 	}
-
-	public void SyncAll() {
+	
+	/**
+	 * 
+	 * @return 上传的结果
+	 */
+	public String SyncAll() {
 		HashMap<Integer, Record> map = dbc.getAllUnsyncedRecords();
-
+		int i=0;
 		// if (map.keySet() != null || !map.keySet().isEmpty()) {
 		for (Integer key : map.keySet()) {
 			String response = Sync(map.get(key));
 			if (!response.equals(FAIL_TO_SYNC)) {
 				dbc.updateRecord(key);
 				System.out.println(response);
+				i=1;
 			} else {
 				// TODO
 			}
+		}
+		if(i==0) {
+			return "失败";
+		}else {
+			return "成功";
 		}
 	}
 	// }
@@ -96,7 +106,6 @@ public class RecordSyncer {
 			String id = record.getID();
 			String time = ((Long) (record.getTime().getTime())).toString();
 			String scret = new EncoderByBASE64Encoder().Ender(id + time);// 加密的
-			System.out.println(scret);
 			HttpGet httpget = new HttpGet(
 					"http://" + host + path + "?r=record/record" + "&id=" + id + "&time=" + time + "&scret=" + scret);
 			HttpResponse response = httpclient.execute(httpget);

@@ -78,6 +78,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	JButton Syner = new JButton("上传数据");
 	/**
+	 * 上传结果
+	 */
+	JLabel suggession1 = new JLabel("");
+	/**
 	 * 连接或者打开d:\test.db文件
 	 */
 	DBController dbc = new DBController(new DBConnecter().getConnection("test"));
@@ -121,6 +125,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		JPanel SynerPanel = new JPanel();// 初始化刷卡面板
 		SynerPanel.add(Syner);
+		SynerPanel.add(suggession1);
 		jtp.add("上传数据", SynerPanel);// 在选项卡界面添加刷卡面板
 		Syner.addActionListener(this);
 	}
@@ -169,7 +174,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		 */
 		else if (e.getSource().equals(Syner)) {
 			RecordSyncer resy = new RecordSyncer(dbc, "120.27.122.238", "/NJFUTest/basic/web/index.php");
-			resy.SyncAll();
+			suggession1.setText(resy.SyncAll());//上传结果输出
 		}
 	}
 
