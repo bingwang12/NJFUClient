@@ -181,6 +181,8 @@ public class DBController {
 	 * 
 	 * @param ID
 	 *            学号
+	 * @param date
+	 *            日期
 	 * @return 是否成功
 	 */
 	public int updateStudentRecord(String ID, Date date) {
@@ -302,6 +304,9 @@ public class DBController {
 	/**
 	 * 根据学号拿最后更新的时间
 	 * 
+	 * @param id
+	 *            学号
+	 * @return 最后更新的时间
 	 */
 	public String getTimeFromStudentRecord(String id) {
 		try {
