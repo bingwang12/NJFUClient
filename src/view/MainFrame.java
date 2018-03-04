@@ -173,7 +173,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		 * 
 		 */
 		else if (e.getSource().equals(Syner)) {
-			RecordSyncer resy = new RecordSyncer(dbc, "120.27.122.238", "/NJFUTest/basic/web/index.php");
+			RecordSyncer resy = new RecordSyncer(dbc, "121.248.150.78:7712", "/apache/run/NJFUTest/basic/web/index.php");
 			suggession1.setText(resy.SyncAll());//上传结果输出
 		}
 	}

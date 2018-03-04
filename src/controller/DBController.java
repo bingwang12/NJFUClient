@@ -190,8 +190,16 @@ public class DBController {
 			stmt.setDate(1, date);
 			stmt.setString(2, ID);
 			int res = stmt.executeUpdate();
+			if(res==0) {
+				String sql1 = "INSERT INTO StudentRecord VALUES (?, ?, ?)";
+				PreparedStatement stmt1 = connection.prepareStatement(sql1);
+				stmt1.setString(1, ID);
+				stmt1.setInt(2, 1);
+				stmt1.setDate(3, date);
+				stmt1.executeUpdate();
+			}else {
 			stmt.close();
-			return res;
+			return res;}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -215,8 +223,17 @@ public class DBController {
 			stmt.setString(1, newCardID);
 			stmt.setString(2, ID);
 			int res = stmt.executeUpdate();
+			if(res==0) {
+				String sql1 = "INSERT INTO Student VALUES (?, ?, ?)";
+				PreparedStatement stmt1 = connection.prepareStatement(sql1);
+				stmt1.setString(1, ID);
+				stmt1.setString(2, "");
+				stmt1.setString(3, newCardID);
+				stmt1.executeUpdate();
+			}else {
 			stmt.close();
 			return res;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -314,12 +331,12 @@ public class DBController {
 				String result = res.getString("LastRecord");
 				return result;
 			}
-			return null;
+			return "0";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return "0";
 	}
 
 	/**
